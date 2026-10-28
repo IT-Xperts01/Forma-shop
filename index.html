@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="Explore FORMA Shop, a frontend portfolio shopping experience built by Joel Eke."
+  >
+  <title>FORMA | Everyday Finds</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to products</a>
+
+  <div class="announcement">
+    Everyday finds. A little more extraordinary.
+  </div>
+
+  <header>
+    <a href="./" class="brand" aria-label="FORMA Shop home">
+      <span class="brand-logo" aria-hidden="true">
+        <svg
+          viewBox="0 0 48 48"
+          width="44"
+          height="44"
+          fill="none"
+        >
+          <path
+            d="M12 17H36L39 39H9L12 17Z"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M18 19V13C18 9.7 20.7 7 24 7C27.3 7 30 9.7 30 13V19"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M20 25H29M20 25V34M20 29H27"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          />
+        </svg>
+      </span>
+
+      <span class="brand-text">
+        <span class="brand-name">FORMA<span>.</span></span>
+        <span class="brand-tagline">EVERYDAY FINDS</span>
+      </span>
+    </a>
+
+    <div class="cart-summary">
+      <button type="button" id="open-cart" class="cart-button">
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          aria-hidden="true"
+        >
+          <path
+            d="M3 3H5L7 15H19L21 7H6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <circle cx="9" cy="20" r="1" />
+          <circle cx="18" cy="20" r="1" />
+        </svg>
+        Cart (<span id="cart-count">0</span>)
+      </button>
+
+      <p>Total: <span id="cart-total">$0.00</span></p>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow">WELCOME TO FORMA</p>
+        <h1 id="hero-title">
+          Everyday essentials.<br>
+          <span>Extraordinary finds.</span>
+        </h1>
+        <p class="hero-description">
+          Discover fresh favourites for your wardrobe, your home,
+          and everything in between.
+        </p>
+        <a href="#collection" class="shop-link">
+          Explore the collection <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-circle"></div>
+        <div class="hero-bag">
+          <svg viewBox="0 0 160 190" fill="none">
+            <path
+              d="M33 59H127L140 167H20L33 59Z"
+              fill="white"
+            />
+            <path
+              d="M57 66V42C57 29 67 19 80 19C93 19 103 29 103 42V66"
+              stroke="white"
+              stroke-width="9"
+              stroke-linecap="round"
+            />
+            <path
+              d="M63 95H103M63 95V139M63 116H94"
+              stroke="#2563eb"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <span class="art-spark spark-one">✦</span>
+        <span class="art-spark spark-two">✦</span>
+        <span class="art-caption">A good find starts here.</span>
+      </div>
+    </section>
+
+    <section
+      id="collection"
+      class="collection"
+      aria-labelledby="collection-title"
+    >
+      <div class="collection-heading">
+        <div>
+          <p class="eyebrow">THE COLLECTION</p>
+          <h2 id="collection-title">Find your next favourite</h2>
+        </div>
+        <p class="collection-note">Browse. Discover. Make it yours.</p>
+      </div>
+
+      <div class="shop-controls">
+        <div class="control-group">
+          <label for="product-search">Search products</label>
+          <input
+            type="search"
+            id="product-search"
+            placeholder="What are you looking for?"
+            disabled
+          >
+        </div>
+
+        <div class="control-group">
+          <label for="category-filter">Category</label>
+          <select id="category-filter" disabled>
+            <option value="all">All categories</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="sort-products">Sort by</label>
+          <select id="sort-products" disabled>
+            <option value="default">Featured</option>
+            <option value="low-high">Price: Low to High</option>
+            <option value="high-low">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="catalog-status">
+        <p id="search-message" role="status">Loading products…</p>
+        <button type="button" id="retry-products" hidden>
+          Try again
+        </button>
+      </div>
+
+      <section
+        id="products"
+        aria-label="Products"
+        aria-busy="true"
+      ></section>
+    </section>
+  </main>
+
+  <dialog
+    id="product-dialog"
+    aria-labelledby="detail-name"
+    aria-describedby="detail-description"
+  >
+    <div class="dialog-heading">
+      <strong>Product details</strong>
+      <button type="button" id="close-product" autofocus>Close</button>
+    </div>
+
+    <div id="detail-image" class="detail-image"></div>
+    <p id="detail-category" class="product-category"></p>
+    <h2 id="detail-name"></h2>
+    <p id="detail-description"></p>
+    <p id="detail-price" class="product-price"></p>
+
+    <button type="button" id="detail-add">Add to cart</button>
+    <p id="detail-message" role="status"></p>
+  </dialog>
+
+  <dialog id="cart-dialog" aria-labelledby="cart-title">
+    <div class="dialog-heading">
+      <h2 id="cart-title">Your cart</h2>
+      <button type="button" id="close-cart" autofocus>Close</button>
+    </div>
+
+    <div id="cart-items"></div>
+
+    <p class="cart-grand-total">
+      Total: <span id="dialog-total">$0.00</span>
+    </p>
+
+    <p class="demo-note">
+      Portfolio demo — no payment is collected.
+    </p>
+  </dialog>
+
+  <p id="cart-message" class="sr-only" role="status"></p>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <p class="footer-brand">FORMA<span>.</span></p>
+        <p>Everyday essentials. Extraordinary finds.</p>
+      </div>
+      <div class="footer-credit">
+        <p>Designed and built by Joel Eke</p>
+        <p class="demo-note">
+          Portfolio demo • DummyJSON sample products • USD prices
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
